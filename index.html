@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Car Detailing Specialist Course</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Noto+Sans+SC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'Roboto', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#3B82F6', // Blue-500
+                            dark: '#60A5FA',  // Blue-400
+                            accent: '#F59E0B', // Amber-500
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+        }
+
+        /* Image overlay gradient */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-gem text-brand-accent text-2xl"></i>
+                    <span class="font-bold text-xl tracking-wide" id="nav-company">Ceramic Original</span>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 hover:text-brand-light dark:hover:text-brand-dark transition">
+                            <i class="fa-solid fa-globe"></i>
+                            <span id="current-lang">TH</span>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 hidden group-hover:block ring-1 ring-black ring-opacity-5">
+                            <a href="#" onclick="setLang('th')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇹🇭 ไทย</a>
+                            <a href="#" onclick="setLang('en')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇬🇧 English</a>
+                            <a href="#" onclick="setLang('cn')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇨🇳 中文</a>
+                        </div>
+                    </div>
+
+                    <!-- Dark Mode Toggle -->
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-accent/20 text-brand-accent border border-brand-accent mb-4 text-sm font-semibold tracking-wider" id="hero-subtitle">PROFESSIONAL TRAINING</span>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" id="course-title">
+                ผู้เชี่ยวชาญด้านการดูแลรักษาสีรถยนต์<br>ด้วยเทคโนโลยีขั้นสูง
+            </h1>
+            <p class="text-xl text-gray-300 mb-8" id="course-title-en">Advanced Car Detailing & Coating Specialist Course</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-white mb-10">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-building text-brand-dark"></i>
+                    <span id="hero-company">บจก.เซรามิกออริจินอล</span>
+                </div>
+                <div class="hidden md:block w-px h-6 bg-gray-500"></div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-user text-brand-dark"></i>
+                    <span id="hero-instructor">คุณอากร</span>
+                </div>
+            </div>
+
+            <a href="#curriculum" class="inline-block bg-brand-light hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105 shadow-lg shadow-blue-500/30" id="btn-start">
+                ดูรายละเอียดหลักสูตร
+            </a>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="py-16 bg-white dark:bg-gray-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" id="info-duration-title">ระยะเวลา</h3>
+                    <p class="text-gray-600 dark:text-gray-400" id="info-duration-desc">3 - 5 วัน (ปฏิบัติ 70% / ทฤษฎี 30%)</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-users text-amber-600 dark:text-amber-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" id="info-target-title">กลุ่มเป้าหมาย</h3>
+                    <p class="text-gray-600 dark:text-gray-400" id="info-target-desc">พนักงานคาร์แคร์, ช่างเทคนิค, ผู้ประกอบการ</p>
+                </div>
+                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa-solid fa-certificate text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" id="info-cert-title">ใบรับรอง</h3>
+                    <p class="text-gray-600 dark:text-gray-400" id="info-cert-desc">มอบใบประกาศนียบัตรเมื่อผ่านเกณฑ์</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Modules -->
+    <section id="curriculum" class="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" id="module-header">โครงสร้างหลักสูตร</h2>
+                <div class="w-20 h-1 bg-brand-light mx-auto rounded"></div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Module 1 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
+                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 1</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m1-title">ทฤษฎีพื้นฐานและเทคโนโลยีเคมีภัณฑ์</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m1-obj">วัตถุประสงค์: เข้าใจโครงสร้างของสีรถยนต์และเลือกใช้สารเคมีได้อย่างปลอดภัย</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m1-list">
+                            <!-- JS will populate -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
+                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto md:order-last" style="background-image: url('https://images.unsplash.com/photo-1520340356584-7eb00c25a7a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m2-title">เทคโนโลยีการทำความสะอาดขั้นสูง</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m2-obj">วัตถุประสงค์: ทำความสะอาดล้ำลึกโดยไม่สร้างรอยใหม่ (Scratch-less Wash)</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m2-list">
+                            <!-- JS will populate -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
+                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://images.unsplash.com/photo-1600271561008-0cc255562095?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 3</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m3-title">เทคโนโลยีการฟื้นฟูสภาพสี</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m3-obj">วัตถุประสงค์: ลบรอยขีดข่วนและดึงความเงางามสูงสุดด้วยเครื่องมือทันสมัย</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m3-list">
+                            <!-- JS will populate -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
+                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto md:order-last" style="background-image: url('https://images.unsplash.com/photo-1598965402089-897ce52e8355?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 4</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m4-title">นวัตกรรมการเคลือบปกป้อง</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m4-obj">วัตถุประสงค์: การติดตั้งเกราะป้องกันสีด้วยวัสดุศาสตร์ยุคใหม่</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m4-list">
+                            <!-- JS will populate -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
+                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://plus.unsplash.com/premium_photo-1661690022838-518df9c8a49c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="p-8 md:w-2/3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 5</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m5-title">การตรวจสอบคุณภาพและการส่งมอบ</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m5-obj">วัตถุประสงค์: สร้างความประทับใจสูงสุดแก่ลูกค้าและมาตรฐานการบริการ</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m5-list">
+                            <!-- JS will populate -->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Evaluation Section -->
+    <section class="py-16 bg-white dark:bg-gray-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Tools -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-screwdriver-wrench text-brand-accent"></i>
+                        <span id="tools-title">อุปกรณ์และเทคโนโลยี</span>
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                            <i class="fa-solid fa-layer-group text-blue-500 mt-1"></i>
+                            <div>
+                                <strong class="block text-gray-900 dark:text-white" id="tool-1-name">เครื่องวัดความหนาสี</strong>
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Defelsko หรือเทียบเท่า</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                            <i class="fa-solid fa-bullseye text-blue-500 mt-1"></i>
+                            <div>
+                                <strong class="block text-gray-900 dark:text-white" id="tool-2-name">เครื่องขัดสี</strong>
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Rupes / Flex (DA & Rotary)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                            <i class="fa-solid fa-lightbulb text-blue-500 mt-1"></i>
+                            <div>
+                                <strong class="block text-gray-900 dark:text-white" id="tool-3-name">ระบบไฟส่องรอย</strong>
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Scangrip Technology</span>
+                            </div>
+                        </li>
+                         <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                            <i class="fa-solid fa-fire-burner text-blue-500 mt-1"></i>
+                            <div>
+                                <strong class="block text-gray-900 dark:text-white" id="tool-4-name">เครื่องอบอินฟราเรด</strong>
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Short-wave Infrared Curing</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Evaluation -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-clipboard-check text-brand-accent"></i>
+                        <span id="eval-title">การวัดผล (Evaluation)</span>
+                    </h2>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border-l-4 border-brand-light">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-gray-900 dark:text-white mb-2" id="eval-1">Pre-test / Post-test</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400" id="eval-1-desc">วัดความรู้ทฤษฎีเคมีภัณฑ์และขั้นตอนการทำงานที่ถูกต้อง</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 dark:text-white mb-2" id="eval-2">Skill Test (สอบปฏิบัติ)</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 ml-2" id="eval-2-list">
+                                    <!-- JS Populated -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-6 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-gem text-brand-accent text-2xl"></i>
+                <span class="text-2xl font-bold" id="footer-company">Ceramic Original Co., Ltd.</span>
+            </div>
+            <p class="text-gray-400 mb-8" id="footer-contact">Contact: Mr. Akorn</p>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 Ceramic Original. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Credit: <span class="text-brand-light font-mono">nothng9</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Logic -->
+    <script>
+        // Data Object for Translations
+        const translations = {
+            th: {
+                // Nav & Hero
+                nav_company: "Ceramic Original",
+                hero_subtitle: "การฝึกอบรมระดับมืออาชีพ",
+                course_title: "ผู้เชี่ยวชาญด้านการดูแลรักษาสีรถยนต์<br>ด้วยเทคโนโลยีขั้นสูง",
+                course_title_en: "Advanced Car Detailing & Coating Specialist Course",
+                hero_company: "บจก.เซรามิกออริจินอล",
+                hero_instructor: "คุณอากร",
+                btn_start: "ดูรายละเอียดหลักสูตร",
+                
+                // Info Grid
+                info_duration_title: "ระยะเวลา",
+                info_duration_desc: "3 - 5 วัน (เน้นปฏิบัติ 70% / ทฤษฎี 30%)",
+                info_target_title: "กลุ่มเป้าหมาย",
+                info_target_desc: "พนักงานคาร์แคร์, ช่างเทคนิค, หรือผู้ประกอบการ",
+                info_cert_title: "ใบรับรอง",
+                info_cert_desc: "มอบใบประกาศนียบัตรเมื่อผ่านเกณฑ์",
+
+                // Module Header
+                module_header: "โครงสร้างหลักสูตร",
+
+                // Module 1
+                m1_title: "Module 1: ทฤษฎีพื้นฐานและเทคโนโลยีเคมีภัณฑ์",
+                m1_obj: "วัตถุประสงค์: เข้าใจโครงสร้างของสีรถยนต์และเลือกใช้สารเคมีได้อย่างปลอดภัย",
+                m1_list: [
+                    "โครงสร้างชั้นสีรถยนต์ยุคใหม่ (Solid, Metallic, Pearl)",
+                    "ความเข้าใจชั้น Clear Coat และความแข็งของสี (Hard vs Soft)",
+                    "ค่า pH และวิทยาศาสตร์เคมีภัณฑ์ (Detailing Chemistry)",
+                    "เทคโนโลยี Nano-cleaning และ Biodegradable",
+                    "การวิเคราะห์สภาพสีด้วยไฟส่องตรวจ (Swirls & Holograms)",
+                    "การวัดความหนาสีด้วย Digital Paint Thickness Gauge"
+                ],
+
+                // Module 2
+                m2_title: "Module 2: เทคโนโลยีการทำความสะอาดขั้นสูง",
+                m2_obj: "วัตถุประสงค์: ทำความสะอาดล้ำลึกโดยไม่สร้างรอยใหม่ (Scratch-less Wash)",
+                m2_list: [
+                    "ระบบ Pre-Wash และ Snow Foam ความหนาแน่นสูง",
+                    "การล้างด้วยระบบไอน้ำ (Steam Cleaning) และฆ่าเชื้อ",
+                    "การขจัดคราบฝังแน่น (Iron & Tar Remover)",
+                    "การใช้ดินน้ำมันสังเคราะห์ (Synthetic Clay Bar/Mitt)"
+                ],
+
+                // Module 3
+                m3_title: "Module 3: เทคโนโลยีการฟื้นฟูสภาพสี",
+                m3_obj: "วัตถุประสงค์: ลบรอยขีดข่วนและดึงความเงางามสูงสุดด้วยเครื่องมือทันสมัย",
+                m3_list: [
+                    "เครื่องขัดสีระบบ Dual Action (DA) vs. Rotary",
+                    "เทคนิคการใช้เครื่อง DA ลดความร้อนสะสม",
+                    "การเลือกแผ่นขัด (Microfiber, Wool, Foam) ให้เหมาะกับรอย",
+                    "เทคนิคการขัดแบบไร้ฝุ่น (Dust-free Polishing)",
+                    "การใช้ยาขัดสูตรน้ำ (Water-based compounds)"
+                ],
+
+                // Module 4
+                m4_title: "Module 4: นวัตกรรมการเคลือบปกป้อง",
+                m4_obj: "วัตถุประสงค์: การติดตั้งเกราะป้องกันสีด้วยวัสดุศาสตร์ยุคใหม่",
+                m4_list: [
+                    "สารเคลือบ Ceramic (SiO2) vs. Graphene (Carbon-based)",
+                    "คุณสมบัติ Hydrophobic และ Oleophobic",
+                    "เทคนิคการลงน้ำยาแบบ Cross-hatch pattern",
+                    "การดู Flash time และการเช็ดเก็บงาน (Leveling)",
+                    "การอบสีด้วยแสงอินฟราเรด (IR Curing Technology)"
+                ],
+
+                // Module 5
+                m5_title: "Module 5: การตรวจสอบและส่งมอบ",
+                m5_obj: "วัตถุประสงค์: สร้างความประทับใจสูงสุดและมาตรฐานการบริการ",
+                m5_list: [
+                    "Final Inspection ภายใต้แสงธรรมชาติและแสงสังเคราะห์",
+                    "สอนลูกค้าดูแลรถหลังเคลือบ (Do's & Don'ts)",
+                    "แนะนำระบบ CRM จัดการข้อมูลลูกค้าและนัดหมาย"
+                ],
+
+                // Tools & Eval
+                tools_title: "อุปกรณ์และเทคโนโลยี",
+                tool_1_name: "เครื่องวัดความหนาสี",
+                tool_2_name: "เครื่องขัดสี",
+                tool_3_name: "ระบบไฟส่องรอย",
+                tool_4_name: "เครื่องอบอินฟราเรด",
+                
+                eval_title: "การวัดผล (Evaluation)",
+                eval_1: "Pre-test / Post-test",
+                eval_1_desc: "วัดความรู้ทฤษฎีเคมีภัณฑ์และขั้นตอน",
+                eval_2: "Skill Test (สอบปฏิบัติ)",
+                eval_2_list: [
+                    "โจทย์: แก้ไขรอยขีดข่วนบนฝากระโปรงรถจริง",
+                    "โจทย์: การลงเคลือบแก้วโดยไม่ให้เกิดคราบ (High spots)"
+                ],
+
+                // Footer
+                footer_company: "บจก.เซรามิกออริจินอล",
+                footer_contact: "ติดต่อ: คุณอากร"
+            },
+            en: {
+                nav_company: "Ceramic Original",
+                hero_subtitle: "PROFESSIONAL TRAINING",
+                course_title: "Advanced Car Detailing &<br>Coating Specialist Course",
+                course_title_en: "Mastering Modern Paint Correction & Protection",
+                hero_company: "Ceramic Original Co., Ltd.",
+                hero_instructor: "Mr. Akorn",
+                btn_start: "View Curriculum",
+                
+                info_duration_title: "Duration",
+                info_duration_desc: "3 - 5 Days (70% Practical / 30% Theory)",
+                info_target_title: "Target Audience",
+                info_target_desc: "Detailers, Technicians, Entrepreneurs",
+                info_cert_title: "Certification",
+                info_cert_desc: "Professional Certificate upon completion",
+
+                module_header: "Course Structure",
+
+                m1_title: "Module 1: Foundation & Smart Chemicals",
+                m1_obj: "Objective: Understanding paint anatomy and chemical safety.",
+                m1_list: [
+                    "Modern Paint Anatomy (Solid, Metallic, Pearl)",
+                    "Understanding Clear Coat hardness (Hard vs Soft)",
+                    "pH levels & Detailing Chemistry",
+                    "Nano-cleaning & Biodegradable technology",
+                    "Paint analysis with Detailing Light (Swirls & Holograms)",
+                    "Measuring with Digital Paint Thickness Gauge"
+                ],
+
+                m2_title: "Module 2: Advanced Decontamination",
+                m2_obj: "Objective: Deep cleaning without creating new scratches.",
+                m2_list: [
+                    "Pre-Wash System & High-density Snow Foam",
+                    "Steam Cleaning Technology & Sanitization",
+                    "Chemical Decontamination (Iron & Tar Remover)",
+                    "Using Synthetic Clay Bar/Mitt with Lubricant"
+                ],
+
+                m3_title: "Module 3: Paint Correction Technology",
+                m3_obj: "Objective: Removing defects and achieving maximum gloss.",
+                m3_list: [
+                    "Dual Action (DA) vs. Rotary Systems",
+                    "DA techniques to reduce heat accumulation",
+                    "Pad selection (Microfiber, Wool, Foam)",
+                    "Dust-free Polishing techniques",
+                    "Water-based compounds application"
+                ],
+
+                m4_title: "Module 4: Advanced Protection & Coating",
+                m4_obj: "Objective: Installing protection with modern materials.",
+                m4_list: [
+                    "Ceramic (SiO2) vs. Graphene (Carbon-based) coatings",
+                    "Hydrophobic & Oleophobic properties",
+                    "Application Techniques (Cross-hatch pattern)",
+                    "Understanding Flash time & Leveling",
+                    "Infrared (IR) Curing Technology"
+                ],
+
+                m5_title: "Module 5: QC & Handover",
+                m5_obj: "Objective: Final inspection and customer service excellence.",
+                m5_list: [
+                    "Final Inspection under natural & synthetic light",
+                    "Customer maintenance advice (Do's & Don'ts)",
+                    "CRM systems for client data & appointments"
+                ],
+
+                tools_title: "Tools & Technology",
+                tool_1_name: "Paint Thickness Gauge",
+                tool_2_name: "Polishing Machines",
+                tool_3_name: "Detailing Lights",
+                tool_4_name: "IR Curing Lamps",
+
+                eval_title: "Evaluation",
+                eval_1: "Pre-test / Post-test",
+                eval_1_desc: "Theory of chemicals and procedures",
+                eval_2: "Skill Test (Practical)",
+                eval_2_list: [
+                    "Task: Correct scratches on actual hood",
+                    "Task: Coating application without high spots"
+                ],
+
+                footer_company: "Ceramic Original Co., Ltd.",
+                footer_contact: "Contact: Mr. Akorn"
+            },
+            cn: {
+                nav_company: "Ceramic Original",
+                hero_subtitle: "专业培训",
+                course_title: "高级汽车美容与<br>镀膜专家课程",
+                course_title_en: "Advanced Car Detailing & Coating Specialist Course",
+                hero_company: "Ceramic Original 有限公司",
+                hero_instructor: "Akorn 先生",
+                btn_start: "查看课程详情",
+                
+                info_duration_title: "课程时长",
+                info_duration_desc: "3 - 5 天 (70% 实操 / 30% 理论)",
+                info_target_title: "目标人群",
+                info_target_desc: "汽车美容技师, 技术人员, 创业者",
+                info_cert_title: "认证",
+                info_cert_desc: "通过考核后颁发专业证书",
+
+                module_header: "课程结构",
+
+                m1_title: "Module 1: 基础理论与智能化学",
+                m1_obj: "目标: 了解漆面结构并安全使用化学品。",
+                m1_list: [
+                    "现代漆面解剖 (素色漆, 金属漆, 珍珠漆)",
+                    "了解清漆层硬度 (硬漆 vs 软漆)",
+                    "pH 值与美容化学",
+                    "纳米清洁与生物降解技术",
+                    "使用美容灯分析漆面 (眩光纹与全息图)",
+                    "使用数字漆膜仪测量厚度"
+                ],
+
+                m2_title: "Module 2: 高级去污技术",
+                m2_obj: "目标: 深度清洁且不产生划痕 (无痕洗车)。",
+                m2_list: [
+                    "预洗系统与高密度雪崩泡沫",
+                    "蒸汽清洁技术与车内消毒",
+                    "化学去污 (铁粉与焦油去除剂)",
+                    "使用合成洗车泥/手套配合润滑剂"
+                ],
+
+                m3_title: "Module 3: 漆面矫正技术",
+                m3_obj: "目标: 修复瑕疵并实现极致光泽。",
+                m3_list: [
+                    "双震抛光机 (DA) vs. 旋抛机 (Rotary)",
+                    "减少热量积聚的 DA 技术",
+                    "抛光盘选择 (超细纤维, 羊毛, 泡沫)",
+                    "无尘抛光技术",
+                    "水性研磨剂的使用"
+                ],
+
+                m4_title: "Module 4: 高级防护与镀膜",
+                m4_obj: "目标: 使用现代材料安装漆面保护甲。",
+                m4_list: [
+                    "陶瓷 (SiO2) vs. 石墨烯 (碳基) 镀膜",
+                    "疏水性与疏油性",
+                    "涂抹技术 (十字交叉法)",
+                    "了解闪干时间与流平技巧",
+                    "红外线 (IR) 固化技术"
+                ],
+
+                m5_title: "Module 5: 质检与交付",
+                m5_obj: "目标: 最终检查与卓越的客户服务。",
+                m5_list: [
+                    "自然光与合成光下的最终检查",
+                    "客户保养建议 (注意事项)",
+                    "使用 CRM 系统管理客户数据与预约"
+                ],
+
+                tools_title: "设备与技术",
+                tool_1_name: "漆膜测厚仪",
+                tool_2_name: "抛光机",
+                tool_3_name: "美容检测灯",
+                tool_4_name: "红外线烤灯",
+
+                eval_title: "考核评估",
+                eval_1: "理论测试 (Pre/Post-test)",
+                eval_1_desc: "化学品理论与操作流程",
+                eval_2: "技能测试 (实操)",
+                eval_2_list: [
+                    "任务: 修复引擎盖上的划痕",
+                    "任务: 镀膜施工 (无残留高点)"
+                ],
+
+                footer_company: "Ceramic Original 有限公司",
+                footer_contact: "联系人: Akorn 先生"
+            }
+        };
+
+        // Current State
+        let currentLang = 'th';
+
+        // Update Content Function
+        function setLang(lang) {
+            currentLang = lang;
+            const data = translations[lang];
+            
+            // Update Text Content
+            document.getElementById('current-lang').innerText = lang.toUpperCase();
+            
+            // All keys in the translation object that map to an HTML ID
+            // NOTE: The ID in HTML uses hyphens (-), keys here use underscores (_)
+            const keysToUpdate = [
+                'nav_company', 'hero_subtitle', 'course_title', 'course_title_en', 'hero_company', 'hero_instructor', 'btn_start',
+                'info_duration_title', 'info_duration_desc', 'info_target_title', 'info_target_desc', 'info_cert_title', 'info_cert_desc',
+                'module_header',
+                'm1_title', 'm1_obj', 'm2_title', 'm2_obj', 'm3_title', 'm3_obj', 'm4_title', 'm4_obj', 'm5_title', 'm5_obj',
+                'tools_title', 'tool_1_name', 'tool_2_name', 'tool_3_name', 'tool_4_name',
+                'eval_title', 'eval_1', 'eval_1_desc', 'footer_company', 'footer_contact'
+            ];
+
+            keysToUpdate.forEach(key => {
+                // Convert key (underscore) to ID (hyphen)
+                const elementId = key.replace(/_/g, '-');
+                const element = document.getElementById(elementId);
+                
+                if(element && data[key]) {
+                    element.innerHTML = data[key];
+                }
+            });
+
+            // Update Lists (Modules & Eval)
+            updateList('m1-list', data.m1_list);
+            updateList('m2-list', data.m2_list);
+            updateList('m3-list', data.m3_list);
+            updateList('m4-list', data.m4_list);
+            updateList('m5-list', data.m5_list);
+            updateList('eval-2-list', data.eval_2_list);
+        }
+
+        function updateList(elementId, items) {
+            const list = document.getElementById(elementId);
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+
+        // Dark Mode Logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Init
+        window.onload = function() {
+            // Check local storage for theme
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').classList.remove('fa-moon');
+                document.getElementById('theme-icon').classList.add('fa-sun');
+            }
+            
+            // Set default lang
+            setLang('th');
+        };
+
+    </script>
+</body>
+</html>
