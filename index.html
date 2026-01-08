@@ -36,27 +36,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Custom Animations */
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
         .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .dark .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
+            background: rgba(17, 24, 39, 0.85);
         }
-
-        /* Image overlay gradient */
         .hero-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+        }
+        /* Fix dropdown hover gap */
+        .dropdown-menu {
+            margin-top: 0.5rem; 
         }
     </style>
 </head>
@@ -67,7 +65,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <i class="fa-solid fa-gem text-brand-accent text-2xl"></i>
                     <span class="font-bold text-xl tracking-wide" id="nav-company">Ceramic Original</span>
                 </div>
@@ -75,20 +73,30 @@
                 <!-- Controls -->
                 <div class="flex items-center space-x-4">
                     <!-- Language Switcher -->
-                    <div class="relative group">
-                        <button class="flex items-center space-x-1 hover:text-brand-light dark:hover:text-brand-dark transition">
+                    <div class="relative group h-full flex items-center">
+                        <button class="flex items-center space-x-1 hover:text-brand-light dark:hover:text-brand-dark transition focus:outline-none">
                             <i class="fa-solid fa-globe"></i>
                             <span id="current-lang">TH</span>
+                            <i class="fa-solid fa-chevron-down text-xs ml-1 opacity-70"></i>
                         </button>
-                        <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 hidden group-hover:block ring-1 ring-black ring-opacity-5">
-                            <a href="#" onclick="setLang('th')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇹🇭 ไทย</a>
-                            <a href="#" onclick="setLang('en')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇬🇧 English</a>
-                            <a href="#" onclick="setLang('cn')" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">🇨🇳 中文</a>
+                        <!-- Dropdown -->
+                        <div class="absolute right-0 top-full pt-2 w-32 hidden group-hover:block z-50">
+                            <div class="bg-white dark:bg-gray-800 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                <button onclick="setLang('th')" class="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
+                                    <span>🇹🇭</span> ไทย
+                                </button>
+                                <button onclick="setLang('en')" class="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
+                                    <span>🇬🇧</span> English
+                                </button>
+                                <button onclick="setLang('cn')" class="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
+                                    <span>🇨🇳</span> 中文
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Dark Mode Toggle -->
-                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition focus:outline-none">
                         <i id="theme-icon" class="fas fa-moon"></i>
                     </button>
                 </div>
@@ -101,24 +109,24 @@
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in">
             <span class="inline-block py-1 px-3 rounded-full bg-brand-accent/20 text-brand-accent border border-brand-accent mb-4 text-sm font-semibold tracking-wider" id="hero-subtitle">PROFESSIONAL TRAINING</span>
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" id="course-title">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg" id="course-title">
                 ผู้เชี่ยวชาญด้านการดูแลรักษาสีรถยนต์<br>ด้วยเทคโนโลยีขั้นสูง
             </h1>
-            <p class="text-xl text-gray-300 mb-8" id="course-title-en">Advanced Car Detailing & Coating Specialist Course</p>
+            <p class="text-xl text-gray-200 mb-8 font-light" id="course-title-en">Advanced Car Detailing & Coating Specialist Course</p>
             
             <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-white mb-10">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg backdrop-blur-sm">
                     <i class="fa-regular fa-building text-brand-dark"></i>
                     <span id="hero-company">บจก.เซรามิกออริจินอล</span>
                 </div>
                 <div class="hidden md:block w-px h-6 bg-gray-500"></div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-lg backdrop-blur-sm">
                     <i class="fa-regular fa-user text-brand-dark"></i>
                     <span id="hero-instructor">คุณอากร</span>
                 </div>
             </div>
 
-            <a href="#curriculum" class="inline-block bg-brand-light hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105 shadow-lg shadow-blue-500/30" id="btn-start">
+            <a href="#curriculum" class="inline-block bg-brand-light hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105 shadow-lg shadow-blue-500/40" id="btn-start">
                 ดูรายละเอียดหลักสูตร
             </a>
         </div>
@@ -128,110 +136,121 @@
     <section class="py-16 bg-white dark:bg-gray-900 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
-                    <div class="w-12 h-12 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400 text-xl"></i>
+                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition duration-300 border border-transparent hover:border-gray-200 dark:hover:border-gray-700">
+                    <div class="w-14 h-14 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-5">
+                        <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2" id="info-duration-title">ระยะเวลา</h3>
-                    <p class="text-gray-600 dark:text-gray-400" id="info-duration-desc">3 - 5 วัน (ปฏิบัติ 70% / ทฤษฎี 30%)</p>
+                    <h3 class="text-xl font-bold mb-3" id="info-duration-title">ระยะเวลา</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed" id="info-duration-desc">3 - 5 วัน (เน้นปฏิบัติ 70% / ทฤษฎี 30%)</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
-                    <div class="w-12 h-12 mx-auto bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-users text-amber-600 dark:text-amber-400 text-xl"></i>
+                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition duration-300 border border-transparent hover:border-gray-200 dark:hover:border-gray-700">
+                    <div class="w-14 h-14 mx-auto bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-users text-amber-600 dark:text-amber-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2" id="info-target-title">กลุ่มเป้าหมาย</h3>
-                    <p class="text-gray-600 dark:text-gray-400" id="info-target-desc">พนักงานคาร์แคร์, ช่างเทคนิค, ผู้ประกอบการ</p>
+                    <h3 class="text-xl font-bold mb-3" id="info-target-title">กลุ่มเป้าหมาย</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed" id="info-target-desc">พนักงานคาร์แคร์, ช่างเทคนิค, หรือผู้ประกอบการ</p>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition">
-                    <div class="w-12 h-12 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-certificate text-green-600 dark:text-green-400 text-xl"></i>
+                <div class="p-8 rounded-2xl bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md transition duration-300 border border-transparent hover:border-gray-200 dark:hover:border-gray-700">
+                    <div class="w-14 h-14 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-certificate text-green-600 dark:text-green-400 text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2" id="info-cert-title">ใบรับรอง</h3>
-                    <p class="text-gray-600 dark:text-gray-400" id="info-cert-desc">มอบใบประกาศนียบัตรเมื่อผ่านเกณฑ์</p>
+                    <h3 class="text-xl font-bold mb-3" id="info-cert-title">ใบรับรอง</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed" id="info-cert-desc">มอบใบประกาศนียบัตรเมื่อผ่านเกณฑ์</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Curriculum Modules -->
-    <section id="curriculum" class="py-16 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <section id="curriculum" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" id="module-header">โครงสร้างหลักสูตร</h2>
-                <div class="w-20 h-1 bg-brand-light mx-auto rounded"></div>
+            <div class="text-center mb-16">
+                <span class="text-brand-light font-semibold tracking-wider text-sm uppercase">Curriculum</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mt-2 mb-4" id="module-header">โครงสร้างหลักสูตร</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-brand-light to-brand-accent mx-auto rounded-full"></div>
             </div>
 
-            <div class="space-y-8">
+            <div class="space-y-10">
                 <!-- Module 1 -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
-                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="p-8 md:w-2/3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 1</span>
+                <div class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="md:w-5/12 bg-cover bg-center h-56 md:h-auto relative" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                         <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-8 md:w-7/12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800">MODULE 1</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m1-title">ทฤษฎีพื้นฐานและเทคโนโลยีเคมีภัณฑ์</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m1-obj">วัตถุประสงค์: เข้าใจโครงสร้างของสีรถยนต์และเลือกใช้สารเคมีได้อย่างปลอดภัย</p>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m1-list">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white group-hover:text-brand-light transition-colors" id="m1-title">ทฤษฎีพื้นฐานและเทคโนโลยีเคมีภัณฑ์</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-5 italic border-l-4 border-gray-200 dark:border-gray-700 pl-3" id="m1-obj">วัตถุประสงค์: เข้าใจโครงสร้างของสีรถยนต์และเลือกใช้สารเคมีได้อย่างปลอดภัย</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-none text-sm" id="m1-list">
                             <!-- JS will populate -->
                         </ul>
                     </div>
                 </div>
 
                 <!-- Module 2 -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
-                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto md:order-last" style="background-image: url('https://images.unsplash.com/photo-1520340356584-7eb00c25a7a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="p-8 md:w-2/3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 2</span>
+                <div class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="md:w-5/12 bg-cover bg-center h-56 md:h-auto md:order-last relative" style="background-image: url('https://images.unsplash.com/photo-1520340356584-7eb00c25a7a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-8 md:w-7/12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800">MODULE 2</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m2-title">เทคโนโลยีการทำความสะอาดขั้นสูง</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m2-obj">วัตถุประสงค์: ทำความสะอาดล้ำลึกโดยไม่สร้างรอยใหม่ (Scratch-less Wash)</p>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m2-list">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white group-hover:text-brand-light transition-colors" id="m2-title">เทคโนโลยีการทำความสะอาดขั้นสูง</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-5 italic border-l-4 border-gray-200 dark:border-gray-700 pl-3" id="m2-obj">วัตถุประสงค์: ทำความสะอาดล้ำลึกโดยไม่สร้างรอยใหม่ (Scratch-less Wash)</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-none text-sm" id="m2-list">
                             <!-- JS will populate -->
                         </ul>
                     </div>
                 </div>
 
                 <!-- Module 3 -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
-                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://images.unsplash.com/photo-1600271561008-0cc255562095?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="p-8 md:w-2/3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 3</span>
+                <div class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="md:w-5/12 bg-cover bg-center h-56 md:h-auto relative" style="background-image: url('https://images.unsplash.com/photo-1600271561008-0cc255562095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-8 md:w-7/12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800">MODULE 3</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m3-title">เทคโนโลยีการฟื้นฟูสภาพสี</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m3-obj">วัตถุประสงค์: ลบรอยขีดข่วนและดึงความเงางามสูงสุดด้วยเครื่องมือทันสมัย</p>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m3-list">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white group-hover:text-brand-light transition-colors" id="m3-title">เทคโนโลยีการฟื้นฟูสภาพสี</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-5 italic border-l-4 border-gray-200 dark:border-gray-700 pl-3" id="m3-obj">วัตถุประสงค์: ลบรอยขีดข่วนและดึงความเงางามสูงสุดด้วยเครื่องมือทันสมัย</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-none text-sm" id="m3-list">
                             <!-- JS will populate -->
                         </ul>
                     </div>
                 </div>
 
                 <!-- Module 4 -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
-                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto md:order-last" style="background-image: url('https://images.unsplash.com/photo-1598965402089-897ce52e8355?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="p-8 md:w-2/3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 4</span>
+                <div class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="md:w-5/12 bg-cover bg-center h-56 md:h-auto md:order-last relative" style="background-image: url('https://images.unsplash.com/photo-1598965402089-897ce52e8355?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                         <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-8 md:w-7/12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800">MODULE 4</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m4-title">นวัตกรรมการเคลือบปกป้อง</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m4-obj">วัตถุประสงค์: การติดตั้งเกราะป้องกันสีด้วยวัสดุศาสตร์ยุคใหม่</p>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m4-list">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white group-hover:text-brand-light transition-colors" id="m4-title">นวัตกรรมการเคลือบปกป้อง</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-5 italic border-l-4 border-gray-200 dark:border-gray-700 pl-3" id="m4-obj">วัตถุประสงค์: การติดตั้งเกราะป้องกันสีด้วยวัสดุศาสตร์ยุคใหม่</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-none text-sm" id="m4-list">
                             <!-- JS will populate -->
                         </ul>
                     </div>
                 </div>
 
                 <!-- Module 5 -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-shadow duration-300">
-                    <div class="md:w-1/3 bg-cover bg-center h-48 md:h-auto" style="background-image: url('https://plus.unsplash.com/premium_photo-1661690022838-518df9c8a49c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="p-8 md:w-2/3">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full">MODULE 5</span>
+                <div class="group bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="md:w-5/12 bg-cover bg-center h-56 md:h-auto relative" style="background-image: url('https://plus.unsplash.com/premium_photo-1661690022838-518df9c8a49c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                         <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-8 md:w-7/12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800">MODULE 5</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 dark:text-white" id="m5-title">การตรวจสอบคุณภาพและการส่งมอบ</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 italic" id="m5-obj">วัตถุประสงค์: สร้างความประทับใจสูงสุดแก่ลูกค้าและมาตรฐานการบริการ</p>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside text-sm" id="m5-list">
+                        <h3 class="text-2xl font-bold mb-3 dark:text-white group-hover:text-brand-light transition-colors" id="m5-title">การตรวจสอบคุณภาพและการส่งมอบ</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-5 italic border-l-4 border-gray-200 dark:border-gray-700 pl-3" id="m5-obj">วัตถุประสงค์: สร้างความประทับใจสูงสุดแก่ลูกค้าและมาตรฐานการบริการ</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 list-none text-sm" id="m5-list">
                             <!-- JS will populate -->
                         </ul>
                     </div>
@@ -242,43 +261,53 @@
     </section>
 
     <!-- Tools & Evaluation Section -->
-    <section class="py-16 bg-white dark:bg-gray-900 transition-colors">
+    <section class="py-16 bg-white dark:bg-gray-900 transition-colors border-t border-gray-100 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 
                 <!-- Tools -->
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                        <i class="fa-solid fa-screwdriver-wrench text-brand-accent"></i>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                        <span class="w-10 h-10 bg-brand-light/10 text-brand-light rounded-lg flex items-center justify-center">
+                             <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </span>
                         <span id="tools-title">อุปกรณ์และเทคโนโลยี</span>
                     </h2>
                     <ul class="space-y-4">
-                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-                            <i class="fa-solid fa-layer-group text-blue-500 mt-1"></i>
+                        <li class="flex items-center gap-5 p-5 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors">
+                            <div class="w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-layer-group text-brand-light"></i>
+                            </div>
                             <div>
-                                <strong class="block text-gray-900 dark:text-white" id="tool-1-name">เครื่องวัดความหนาสี</strong>
-                                <span class="text-sm text-gray-600 dark:text-gray-400">Defelsko หรือเทียบเท่า</span>
+                                <strong class="block text-lg text-gray-900 dark:text-white" id="tool-1-name">เครื่องวัดความหนาสี</strong>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 font-light">Defelsko or Equivalent</span>
                             </div>
                         </li>
-                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-                            <i class="fa-solid fa-bullseye text-blue-500 mt-1"></i>
+                        <li class="flex items-center gap-5 p-5 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors">
+                            <div class="w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-bullseye text-brand-light"></i>
+                            </div>
                             <div>
-                                <strong class="block text-gray-900 dark:text-white" id="tool-2-name">เครื่องขัดสี</strong>
-                                <span class="text-sm text-gray-600 dark:text-gray-400">Rupes / Flex (DA & Rotary)</span>
+                                <strong class="block text-lg text-gray-900 dark:text-white" id="tool-2-name">เครื่องขัดสี</strong>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 font-light">Rupes / Flex (DA & Rotary)</span>
                             </div>
                         </li>
-                        <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-                            <i class="fa-solid fa-lightbulb text-blue-500 mt-1"></i>
+                        <li class="flex items-center gap-5 p-5 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors">
+                            <div class="w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-lightbulb text-brand-light"></i>
+                            </div>
                             <div>
-                                <strong class="block text-gray-900 dark:text-white" id="tool-3-name">ระบบไฟส่องรอย</strong>
-                                <span class="text-sm text-gray-600 dark:text-gray-400">Scangrip Technology</span>
+                                <strong class="block text-lg text-gray-900 dark:text-white" id="tool-3-name">ระบบไฟส่องรอย</strong>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 font-light">Scangrip Technology</span>
                             </div>
                         </li>
-                         <li class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-                            <i class="fa-solid fa-fire-burner text-blue-500 mt-1"></i>
+                         <li class="flex items-center gap-5 p-5 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-750 transition-colors">
+                            <div class="w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm">
+                                <i class="fa-solid fa-fire-burner text-brand-light"></i>
+                            </div>
                             <div>
-                                <strong class="block text-gray-900 dark:text-white" id="tool-4-name">เครื่องอบอินฟราเรด</strong>
-                                <span class="text-sm text-gray-600 dark:text-gray-400">Short-wave Infrared Curing</span>
+                                <strong class="block text-lg text-gray-900 dark:text-white" id="tool-4-name">เครื่องอบอินฟราเรด</strong>
+                                <span class="text-sm text-gray-500 dark:text-gray-400 font-light">Short-wave Infrared Curing</span>
                             </div>
                         </li>
                     </ul>
@@ -286,21 +315,36 @@
 
                 <!-- Evaluation -->
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                        <i class="fa-solid fa-clipboard-check text-brand-accent"></i>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
+                         <span class="w-10 h-10 bg-green-500/10 text-green-500 rounded-lg flex items-center justify-center">
+                             <i class="fa-solid fa-clipboard-check"></i>
+                        </span>
                         <span id="eval-title">การวัดผล (Evaluation)</span>
                     </h2>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border-l-4 border-brand-light">
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-bold text-gray-900 dark:text-white mb-2" id="eval-1">Pre-test / Post-test</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400" id="eval-1-desc">วัดความรู้ทฤษฎีเคมีภัณฑ์และขั้นตอนการทำงานที่ถูกต้อง</p>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-brand-light/10 rounded-full blur-2xl"></div>
+                        
+                        <div class="space-y-8 relative z-10">
+                            <div class="flex gap-4">
+                                <div class="mt-1">
+                                    <i class="fa-solid fa-pen-to-square text-brand-dark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1" id="eval-1">Pre-test / Post-test</h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed" id="eval-1-desc">วัดความรู้ทฤษฎีเคมีภัณฑ์และขั้นตอนการทำงานที่ถูกต้อง</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold text-gray-900 dark:text-white mb-2" id="eval-2">Skill Test (สอบปฏิบัติ)</h4>
-                                <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 ml-2" id="eval-2-list">
-                                    <!-- JS Populated -->
-                                </ul>
+                            <hr class="border-gray-200 dark:border-gray-700">
+                            <div class="flex gap-4">
+                                <div class="mt-1">
+                                    <i class="fa-solid fa-car-on text-brand-dark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1" id="eval-2">Skill Test (สอบปฏิบัติ)</h4>
+                                    <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 mt-2" id="eval-2-list">
+                                        <!-- JS Populated -->
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -311,17 +355,19 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+    <footer class="bg-gray-900 text-white py-16 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="mb-6 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-gem text-brand-accent text-2xl"></i>
-                <span class="text-2xl font-bold" id="footer-company">Ceramic Original Co., Ltd.</span>
+            <div class="mb-6 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-gem text-brand-accent text-3xl"></i>
+                <span class="text-3xl font-bold tracking-tight" id="footer-company">Ceramic Original Co., Ltd.</span>
             </div>
-            <p class="text-gray-400 mb-8" id="footer-contact">Contact: Mr. Akorn</p>
+            <p class="text-gray-400 mb-10 text-lg font-light" id="footer-contact">Contact: Mr. Akorn</p>
             
             <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                 <p>&copy; 2024 Ceramic Original. All rights reserved.</p>
-                <p class="mt-2 md:mt-0">Credit: <span class="text-brand-light font-mono">nothng9</span></p>
+                <div class="mt-4 md:mt-0 flex items-center gap-4">
+                     <p>Credit: <span class="text-brand-light font-mono hover:text-white transition cursor-default">nothng9</span></p>
+                </div>
             </div>
         </div>
     </footer>
@@ -331,7 +377,6 @@
         // Data Object for Translations
         const translations = {
             th: {
-                // Nav & Hero
                 nav_company: "Ceramic Original",
                 hero_subtitle: "การฝึกอบรมระดับมืออาชีพ",
                 course_title: "ผู้เชี่ยวชาญด้านการดูแลรักษาสีรถยนต์<br>ด้วยเทคโนโลยีขั้นสูง",
@@ -340,7 +385,6 @@
                 hero_instructor: "คุณอากร",
                 btn_start: "ดูรายละเอียดหลักสูตร",
                 
-                // Info Grid
                 info_duration_title: "ระยะเวลา",
                 info_duration_desc: "3 - 5 วัน (เน้นปฏิบัติ 70% / ทฤษฎี 30%)",
                 info_target_title: "กลุ่มเป้าหมาย",
@@ -348,10 +392,8 @@
                 info_cert_title: "ใบรับรอง",
                 info_cert_desc: "มอบใบประกาศนียบัตรเมื่อผ่านเกณฑ์",
 
-                // Module Header
                 module_header: "โครงสร้างหลักสูตร",
 
-                // Module 1
                 m1_title: "Module 1: ทฤษฎีพื้นฐานและเทคโนโลยีเคมีภัณฑ์",
                 m1_obj: "วัตถุประสงค์: เข้าใจโครงสร้างของสีรถยนต์และเลือกใช้สารเคมีได้อย่างปลอดภัย",
                 m1_list: [
@@ -363,7 +405,6 @@
                     "การวัดความหนาสีด้วย Digital Paint Thickness Gauge"
                 ],
 
-                // Module 2
                 m2_title: "Module 2: เทคโนโลยีการทำความสะอาดขั้นสูง",
                 m2_obj: "วัตถุประสงค์: ทำความสะอาดล้ำลึกโดยไม่สร้างรอยใหม่ (Scratch-less Wash)",
                 m2_list: [
@@ -373,7 +414,6 @@
                     "การใช้ดินน้ำมันสังเคราะห์ (Synthetic Clay Bar/Mitt)"
                 ],
 
-                // Module 3
                 m3_title: "Module 3: เทคโนโลยีการฟื้นฟูสภาพสี",
                 m3_obj: "วัตถุประสงค์: ลบรอยขีดข่วนและดึงความเงางามสูงสุดด้วยเครื่องมือทันสมัย",
                 m3_list: [
@@ -384,7 +424,6 @@
                     "การใช้ยาขัดสูตรน้ำ (Water-based compounds)"
                 ],
 
-                // Module 4
                 m4_title: "Module 4: นวัตกรรมการเคลือบปกป้อง",
                 m4_obj: "วัตถุประสงค์: การติดตั้งเกราะป้องกันสีด้วยวัสดุศาสตร์ยุคใหม่",
                 m4_list: [
@@ -395,7 +434,6 @@
                     "การอบสีด้วยแสงอินฟราเรด (IR Curing Technology)"
                 ],
 
-                // Module 5
                 m5_title: "Module 5: การตรวจสอบและส่งมอบ",
                 m5_obj: "วัตถุประสงค์: สร้างความประทับใจสูงสุดและมาตรฐานการบริการ",
                 m5_list: [
@@ -404,7 +442,6 @@
                     "แนะนำระบบ CRM จัดการข้อมูลลูกค้าและนัดหมาย"
                 ],
 
-                // Tools & Eval
                 tools_title: "อุปกรณ์และเทคโนโลยี",
                 tool_1_name: "เครื่องวัดความหนาสี",
                 tool_2_name: "เครื่องขัดสี",
@@ -420,7 +457,6 @@
                     "โจทย์: การลงเคลือบแก้วโดยไม่ให้เกิดคราบ (High spots)"
                 ],
 
-                // Footer
                 footer_company: "บจก.เซรามิกออริจินอล",
                 footer_contact: "ติดต่อ: คุณอากร"
             },
@@ -594,56 +630,36 @@
             }
         };
 
-        // Current State
         let currentLang = 'th';
 
-        // Update Content Function
         function setLang(lang) {
-            currentLang = lang;
-            const data = translations[lang];
-            
-            // Update Text Content
-            document.getElementById('current-lang').innerText = lang.toUpperCase();
-            
-            // All keys in the translation object that map to an HTML ID
-            // NOTE: The ID in HTML uses hyphens (-), keys here use underscores (_)
-            const keysToUpdate = [
-                'nav_company', 'hero_subtitle', 'course_title', 'course_title_en', 'hero_company', 'hero_instructor', 'btn_start',
-                'info_duration_title', 'info_duration_desc', 'info_target_title', 'info_target_desc', 'info_cert_title', 'info_cert_desc',
-                'module_header',
-                'm1_title', 'm1_obj', 'm2_title', 'm2_obj', 'm3_title', 'm3_obj', 'm4_title', 'm4_obj', 'm5_title', 'm5_obj',
-                'tools_title', 'tool_1_name', 'tool_2_name', 'tool_3_name', 'tool_4_name',
-                'eval_title', 'eval_1', 'eval_1_desc', 'footer_company', 'footer_contact'
-            ];
-
-            keysToUpdate.forEach(key => {
-                // Convert key (underscore) to ID (hyphen)
-                const elementId = key.replace(/_/g, '-');
-                const element = document.getElementById(elementId);
+            try {
+                currentLang = lang;
+                const data = translations[lang];
                 
-                if(element && data[key]) {
-                    element.innerHTML = data[key];
-                }
-            });
-
-            // Update Lists (Modules & Eval)
-            updateList('m1-list', data.m1_list);
-            updateList('m2-list', data.m2_list);
-            updateList('m3-list', data.m3_list);
-            updateList('m4-list', data.m4_list);
-            updateList('m5-list', data.m5_list);
-            updateList('eval-2-list', data.eval_2_list);
-        }
-
-        function updateList(elementId, items) {
-            const list = document.getElementById(elementId);
-            if (!list) return;
-            list.innerHTML = '';
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                list.appendChild(li);
-            });
+                // Update Badge
+                const langBadge = document.getElementById('current-lang');
+                if(langBadge) langBadge.innerText = lang.toUpperCase();
+                
+                // Update All Elements safely
+                Object.keys(data).forEach(key => {
+                    // Convert key (underscore) to ID (hyphen)
+                    const elementId = key.replace(/_/g, '-');
+                    const element = document.getElementById(elementId);
+                    
+                    if (element) {
+                        const value = data[key];
+                        if (Array.isArray(value)) {
+                            // Style for list items
+                            element.innerHTML = value.map(item => `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-light mt-1 text-xs"></i><span>${item}</span></li>`).join('');
+                        } else {
+                            element.innerHTML = value;
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Language switch failed:", error);
+            }
         }
 
         // Dark Mode Logic
@@ -667,13 +683,17 @@
         // Init
         window.onload = function() {
             // Check local storage for theme
-            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
-                document.getElementById('theme-icon').classList.remove('fa-moon');
-                document.getElementById('theme-icon').classList.add('fa-sun');
+                const icon = document.getElementById('theme-icon');
+                if(icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
             }
             
-            // Set default lang
+            // Initial render
             setLang('th');
         };
 
